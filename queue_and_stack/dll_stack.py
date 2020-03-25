@@ -6,7 +6,6 @@ class Stack:
     def __init__(self):
         self.size = 0
         # Why is our DLL a good choice to store our elements?
-        # - So the DLL can do the work
         self.storage = DoublyLinkedList()
 
     # Adds value to end of list
