@@ -22,10 +22,14 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        # Key is not in cache - return None
         if key not in self.cache:
             return None
         else:
+            # Key is in cache
+            # move it to most recently used
             self.storage.move_to_end(self.cache[key])
+            # return value
             return self.cache[key].value[1]
 
     """
@@ -40,21 +44,31 @@ class LRUCache:
     """
     # Add key-value pair to cache
     def set(self, key, value):
-        # Add newly add pair to head
-        # If cache is at limit before adding entry, remove oldest entry
+        # if item/key already exists
+        if key in self.cache:
+            # overwrite the value
+            # where is the value stored
+            node = self.cache[key]
+            node.value = (key, value)
+            # move to the tail (most recently used)
+            self.storage.move_to_end(node)
+            return
+        
+        # size is a at limit  
         if self.storage.length == self.limit:
-            
-            # if key not in self.cache:
-            #     del self.cache[self.storage.tail.value[0]]
-                
-            self.storage.remove_from_tail((key, value))
-            self.storage.add_to_head((key, value))
-            self.cache[key] = self.storage.head
-            
-            
-        # If cache already exists, overwrite old value
-        else:
-            self.storage.add_to_head((key, value))
-            self.cache[key] = self.storage.head
-            
+            # evict the oldest one
+            index_of_oldest = self.storage.head.value[0]
+            del self.cache[index_of_oldest]
+            self.storage.remove_from_head((key, value))
+            # add the new one to the end
+        
+        # size is not a limit  
+            # add to order
+        self.storage.add_to_tail((key, value))
+            # add to cache
+        self.cache[key] = self.storage.tail
+        
+        
+          
+        
             
