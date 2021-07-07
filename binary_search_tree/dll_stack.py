@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./doubly_linked_list')
+sys.path.append('./doubly_linked_list.py')
 from doubly_linked_list import DoublyLinkedList
 
 class Stack:
@@ -20,7 +20,7 @@ class Stack:
             return None
         else:
             # Return the function to remove the last item
-            return self.storage.remove_from_tail()
+            return self.storage.remove_from_tail(())
         
     def len(self):
         return self.storage.length

@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./doubly_linked_list')
+sys.path.append('./doubly_linked_list.py')
 from doubly_linked_list import DoublyLinkedList
 
 
@@ -21,7 +21,7 @@ class Queue:
             return None
         else:
             # Else return the function to remove first item
-            return self.storage.remove_from_head()
+            return self.storage.remove_from_head(())
 
     def len(self):
         return self.storage.length
